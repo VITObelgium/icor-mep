@@ -1,0 +1,6 @@
+.idea/
+dist/
+.eggs/
+build/
+icor_mep.egg-info/
+*.pyc

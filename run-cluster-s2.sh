@@ -6,7 +6,8 @@ if [ "$#" -lt 1 ]; then
 fi
 
 zip -r icor_mep.zip icor_mep/ && \
-spark-submit --master yarn-cluster --num-executors 4 --py-files icor_mep.zip spark.py \
+spark-submit --master yarn-cluster --executor-memory 3G --conf spark.shuffle.service.enabled=true \
+                                        --conf spark.dynamicAllocation.enabled=true --py-files icor_mep.zip spark.py \
                                         --cloud_average_threshold 0.19 --cloud_low_band B01 \
                                         --cloud_low_threshold 0.25 --cirrus true --aot true \
                                         --aot_window_size 100 --simec true --watervapor false \

@@ -5,7 +5,8 @@ if [ "$#" -lt 1 ]; then
   exit 1
 fi
 
-spark-submit --master local[*] spark.py --cloud_average_threshold 0.19 --cloud_low_band B01 \
+spark-submit --master local[2] --executor-memory 3G --conf spark.eventLog.enabled=false spark.py \
+                                        --cloud_average_threshold 0.19 --cloud_low_band B01 \
                                         --cloud_low_threshold 0.25 --cirrus true --aot true \
                                         --aot_window_size 100 --simec true --watervapor false \
                                         --bg_window 1 --cirrus_threshold 0.01 --aot_override 0.1 \

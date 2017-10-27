@@ -4,3 +4,4 @@ dist/
 build/
 icor_mep.egg-info/
 *.pyc
+icor_mep.zip

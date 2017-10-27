@@ -60,7 +60,7 @@ def process_product(product, args):
     params["ozone_override"] = args.ozone_override
     params["watervapor_override"] = args.wv_override
 
-    params["output_file"] = "/data/users/Private/" + getpass.getuser() + "/icor_results"
+    params["output_file"] = "/data/users/Private/" + getpass.getuser() + "/icor_results/"
 
     params["low_band"] = args.cloud_low_band
     params["average_threshold"] = args.cloud_average_threshold
@@ -79,7 +79,7 @@ def process_product(product, args):
             params[section + "_" + param] = value
 
     try:
-        working_folder = os.path.dirname(os.path.realpath(__file__))
+        working_folder = os.getcwd()
         if context["instrument"] == "landsat8":
             if context["workflow"] == "simec":
                 icor.landsat8.process_tgz(context, product, working_folder)

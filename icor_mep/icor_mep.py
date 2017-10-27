@@ -1,7 +1,7 @@
 from __future__ import absolute_import
 
 import ConfigParser
-import os
+import os, errno
 import logging
 import traceback
 
@@ -43,6 +43,13 @@ def process_product(product, args):
     elif args.data_type == "S2":
         conf.read(icor_dir + "/src/config/local_sentinel2_simec.ini")
 
+    output_dir = "/data/users/Private/" + getpass.getuser() + "/icor_results/"
+    try:
+        os.makedirs(output_dir)
+    except OSError as e:
+        if e.errno != errno.EEXIST:
+            raise
+
     params = {}
 
     params["keep_intermediate"] = "false"
@@ -60,7 +67,7 @@ def process_product(product, args):
     params["ozone_override"] = args.ozone_override
     params["watervapor_override"] = args.wv_override
 
-    params["output_file"] = "/data/users/Private/" + getpass.getuser() + "/icor_results/"
+    params["output_file"] = output_dir
 
     params["low_band"] = args.cloud_low_band
     params["average_threshold"] = args.cloud_average_threshold

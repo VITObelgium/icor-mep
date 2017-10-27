@@ -56,7 +56,7 @@ def process_product(product, args):
     params["ozone_override"] = args.ozone_override
     params["watervapor_override"] = args.wv_override
 
-    params["output_file"] = "/data/users/" + getpass.getuser() + "/Private"
+    params["output_file"] = "/data/users/Private/" + getpass.getuser() + "/icor_results"
 
     params["low_band"] = args.cloud_low_band
     params["average_threshold"] = args.cloud_average_threshold

@@ -25,11 +25,16 @@ def process_product(product, args):
     import icor.sentinel2
     import getpass
 
+    logger = setup_logger()
+
     conf = ConfigParser.SafeConfigParser()
     try:
         icor_dir = str(os.environ['ICOR_DIR'])
+        logger.info('Using iCOR dir %s', icor_dir)
     except Exception:
-        raise Exception("environment variable ICOR_DIR not set")
+        icor_dir = '/data/icor/v1.0.0'
+        os.environ['ICOR_DIR'] = icor_dir
+        logger.info('Using default iCOR dir %s', icor_dir)
 
     conf.set("DEFAULT", "install_dir", icor_dir)
 
@@ -42,7 +47,6 @@ def process_product(product, args):
 
     params["keep_intermediate"] = "false"
 
-    logger = setup_logger()
     # convert to params for context
     context = icor.context.SimpleContext(params, logger=logger)
     # status

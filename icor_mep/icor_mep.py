@@ -36,6 +36,9 @@ def process_product(product, args):
         os.environ['ICOR_DIR'] = icor_dir
         logger.info('Using default iCOR dir %s', icor_dir)
 
+    # set GDAL data dir, otherwise images are not projected
+    os.environ['GDAL_DATA'] = '/opt/gdal2/share/gdal'
+
     conf.set("DEFAULT", "install_dir", icor_dir)
 
     if args.data_type == "L8":
